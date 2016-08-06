@@ -1,1 +1,0 @@
-This is an old gamemode with a custom weapon which is has severe accuracy issues regarding aiming

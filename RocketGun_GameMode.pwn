@@ -65,13 +65,13 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 	{
 		for(new _R=0; _R < 10; _R++) // Rocket from StarGate lolz
 		{
-	        new Float:RX, Float:RY, Float:RZ, Float:RA[7];
-	    	if(RocketLaunched[_R]==true) continue;
-	    	RocketLaunched[_R]=true;
-	    	Fire[_R]=playerid;
-	    	if(IsValidObject(Rocket[_R])) DestroyObject(Rocket[_R]);
-	    	GetPlayerCameraFrontVector(playerid, RA[0], RA[1], RA[2]);
-	    	GetPlayerFacingAngle(playerid, RA[3]);
+			new Float:RX, Float:RY, Float:RZ, Float:RA[7];
+			if(RocketLaunched[_R]==true) continue;
+			RocketLaunched[_R]=true;
+			Fire[_R]=playerid;
+			if(IsValidObject(Rocket[_R])) DestroyObject(Rocket[_R]);
+			GetPlayerCameraFrontVector(playerid, RA[0], RA[1], RA[2]);
+			GetPlayerFacingAngle(playerid, RA[3]);
 			GetPlayerCameraPos(playerid, RX, RY, RZ);
 			Rocket[_R]=CreateObject(18693, RX, RY, RZ, 90,0,RA[3]+RA[2]);
 			RA[4]=RX+(RA[0]*1000);
@@ -79,7 +79,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 			RA[6]=RZ+(RA[2]*1000);
 			MoveObject(Rocket[_R], RA[4], RA[5], RA[6], 9);
 			break;
-    	}
+		}
 	}
 	return 1;
 }
@@ -92,27 +92,27 @@ public RocketUpdate()
 	for(new _R=0; _R < 10; _R++)
 	{
 		/*RocketExceptions[R]++;
-	    if(RocketExceptions[R]>15 && RocketZ>100)
-	    {
-	        RocketZ=0;
+		if(RocketExceptions[R]>15 && RocketZ>100)
+		{
+			RocketZ=0;
 			foreach(Player, i)
 			{
-			    if(Fire[R]==i) continue;
-			    if(IsPlayerInRangeOfPoint(i, 3, RX, RY, RZ))
-			    {
-			        RocketLaunched[R]=false;
-				    RocketExceptions[R]=0; Fire[R]=-1;
+				if(Fire[R]==i) continue;
+				if(IsPlayerInRangeOfPoint(i, 3, RX, RY, RZ))
+				{
+					RocketLaunched[R]=false;
+					RocketExceptions[R]=0; Fire[R]=-1;
 					CreateExplosion(RX, RY, RZ, 7, 17);
 					DestroyObject(Rocket[R]);
 				}
 			}
 		}else RocketZ++;*/
-	    if(RocketLaunched[_R]==false) continue;
-	    GetObjectPos(Rocket[_R], RX, RY, RZ);
+		if(RocketLaunched[_R]==false) continue;
+		GetObjectPos(Rocket[_R], RX, RY, RZ);
 		MapAndreas_FindZ_For2DCoord(RX, RY, MZ);
 		if(MZ >= RZ)
 		{   RocketLaunched[_R]=false;
-		    RocketExceptions[_R]=0; Fire[_R]=-1;
+			RocketExceptions[_R]=0; Fire[_R]=-1;
 			CreateExplosion(RX, RY, RZ, 7, 17);
 			DestroyObject(Rocket[_R]); /*new Rstr[128];
 			format(Rstr, 128, "Boom [%i] At %f %f %f",R,RX,RY,RZ);
@@ -138,12 +138,12 @@ public OnPlayerSpawn(playerid)
 
 public OnPlayerDeath(playerid, killerid, reason)
 {
-    new playercash;
+	new playercash;
 	if(killerid == INVALID_PLAYER_ID) {
-        SendDeathMessage(INVALID_PLAYER_ID,playerid,reason);
-        ResetPlayerMoney(playerid);
+		SendDeathMessage(INVALID_PLAYER_ID,playerid,reason);
+		ResetPlayerMoney(playerid);
 	} else {
-	    SendDeathMessage(killerid,playerid,reason);
+		SendDeathMessage(killerid,playerid,reason);
 		SetPlayerScore(killerid,GetPlayerScore(killerid)+1);
 		playercash = GetPlayerMoney(playerid);
 		if (playercash > 0)  {
@@ -168,7 +168,7 @@ public OnPlayerRequestClass(playerid, classid)
 
 public OnGameModeExit()
 {
-    KillTimer(rocket_timer);
+	KillTimer(rocket_timer);
 	return 1;
 }
 
